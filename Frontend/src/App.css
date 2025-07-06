@@ -1,0 +1,469 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base layout fixes */
+html, body, #root {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Custom scrollbar for scrollable containers */
+.custom-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Auth Page Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Auth Form Animations */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+.slide-in-left {
+  animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Auth Pages Styling */
+@layer components {
+  /* Page Layout */
+  .auth-page-container {
+    @apply relative min-h-[calc(100vh-5rem)] flex items-center justify-center w-full overflow-x-hidden
+    bg-gradient-to-b from-base-100 to-base-200;
+  }
+
+  .auth-content-wrapper {
+    @apply flex w-full md:flex-row flex-col;
+  }
+
+  /* Decorative Elements */
+  .auth-decoration-circle {
+    @apply absolute w-64 h-64 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10
+    blur-xl opacity-70 -z-10;
+  }
+
+  /* Form Container */
+  .auth-form-container {
+    @apply flex-1 flex items-center justify-center p-6 md:p-10 relative z-10;
+  }
+
+  .auth-form-card {
+    @apply w-full max-w-md space-y-8 bg-base-100 p-8 rounded-3xl shadow-lg border border-base-300
+    transition-all duration-500 hover:shadow-xl relative z-10 overflow-hidden;
+  }
+
+  /* Feature Container */
+  .auth-feature-container {
+    @apply hidden lg:flex flex-1 bg-gradient-to-br from-primary/20 to-secondary/20 
+    items-center justify-center p-8 relative z-10;
+  }
+
+  .auth-feature-card {
+    @apply max-w-lg bg-base-100/80 backdrop-blur-lg p-12 rounded-3xl shadow-xl 
+    border border-base-300 transition-all duration-500 hover:shadow-2xl;
+  }
+
+  /* Branding Elements */
+  .auth-branding {
+    @apply text-center flex flex-col items-center gap-2 group mb-10;
+  }
+
+  .auth-logo-container {
+    @apply p-4 rounded-full bg-primary/10 transition-all duration-500 
+    transform hover:scale-110 hover:rotate-6 group-hover:bg-primary/20;
+  }
+
+  .auth-logo-icon {
+    @apply h-12 w-12 text-primary animate-pulse;
+  }
+
+  .auth-title {
+    @apply text-3xl font-bold mt-4 bg-gradient-to-r from-primary to-secondary 
+    bg-clip-text text-transparent transition-all duration-300;
+  }
+
+  .auth-subtitle {
+    @apply text-lg text-base-content/70 mt-2;
+  }
+
+  /* Form Elements */
+  .auth-form {
+    @apply space-y-8;
+  }
+
+  .form-fields {
+    @apply space-y-6;
+  }
+
+  .form-field {
+    @apply space-y-2;
+  }
+
+  .form-field-header {
+    @apply flex justify-between items-center;
+  }
+
+  .form-field-label {
+    @apply text-base font-medium;
+  }
+
+  .form-field-link {
+    @apply text-primary hover:underline text-sm transition-all duration-300;
+  }
+
+  .form-input-container {
+    @apply relative transition-all duration-300 transform 
+    border-2 border-base-300 rounded-xl overflow-hidden;
+  }
+
+  .form-input-container.focused {
+    @apply border-primary scale-[1.01] shadow-md;
+  }
+
+  .form-field-icon {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-base-content/40
+    transition-all duration-300 z-10;
+  }
+
+  .form-input-container.focused .form-field-icon {
+    @apply text-primary;
+  }
+
+  .form-input {
+    @apply input w-full pl-12 pr-12 h-14 bg-base-100 border-none focus:outline-none
+    transition-all duration-300 z-20;
+  }
+
+  .form-label {
+    @apply absolute left-12 top-1/2 -translate-y-1/2 text-base-content/60 
+    transition-all duration-300 pointer-events-none z-0;
+  }
+
+  .form-input-container.focused .form-label,
+  .form-input-container.has-value .form-label {
+    @apply -translate-y-8 text-xs text-primary;
+  }
+
+  .form-toggle-visibility {
+    @apply absolute right-4 top-1/2 -translate-y-1/2 hover:text-primary 
+    transition-colors duration-300 z-30;
+  }
+
+  .toggle-icon {
+    @apply h-5 w-5 text-base-content/60 hover:text-primary transition-colors duration-300;
+  }
+
+  .form-hint {
+    @apply text-xs text-base-content/60 mt-2 ml-1;
+  }
+
+  /* Button Styling */
+  .auth-submit-button {
+    @apply btn w-full h-14 text-lg font-semibold flex items-center justify-center gap-2
+    transition-all duration-500 bg-gradient-to-r from-primary to-secondary hover:scale-[1.02] 
+    hover:shadow-lg text-white border-none;
+  }
+
+  .auth-btn-text {
+    @apply transition-all duration-300;
+  }
+
+  .auth-btn-icon {
+    @apply w-5 h-5 ml-1 transition-all duration-500;
+  }
+
+  .auth-submit-button:hover .auth-btn-icon {
+    @apply transform translate-x-1;
+  }
+
+  .auth-loading-icon {
+    @apply h-5 w-5 animate-spin;
+  }
+
+  .auth-submit-button.loading {
+    @apply bg-primary/80 cursor-not-allowed;
+  }
+
+  .auth-submit-button.success {
+    @apply bg-success;
+  }
+
+  /* Alt Action */
+  .auth-alt-action {
+    @apply text-center pt-4 border-t border-base-300 mt-6 text-base-content/70;
+  }
+
+  .auth-alt-link {
+    @apply text-primary hover:underline font-semibold transition-colors duration-300;
+  }
+
+  /* Feature Content */
+  .auth-feature-icon-container {
+    @apply p-6 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full shadow-xl mx-auto
+    transform transition-transform duration-500 hover:rotate-3 hover:scale-105 mb-8;
+  }
+
+  .auth-feature-icon {
+    @apply h-16 w-16 text-primary transition-all duration-500;
+  }
+
+  .auth-feature-title {
+    @apply text-4xl font-bold mb-6 text-center bg-gradient-to-r from-primary to-secondary 
+    bg-clip-text text-transparent;
+  }
+
+  .auth-feature-description {
+    @apply text-xl text-base-content/80 mb-8 text-center;
+  }
+
+  .auth-features-grid {
+    @apply grid grid-cols-2 gap-4 mt-8;
+  }
+
+  .auth-features-list {
+    @apply flex flex-col space-y-4 mt-8;
+  }
+
+  .auth-feature-item {
+    @apply flex items-center gap-4 p-4 rounded-xl transform 
+    transition-all duration-300 hover:scale-[1.02];
+  }
+
+  .auth-feature-item.primary-feature {
+    @apply bg-primary/10;
+  }
+
+  .auth-feature-item.secondary-feature {
+    @apply bg-secondary/10;
+  }
+
+  .auth-feature-item-icon-container {
+    @apply p-3 rounded-full transition-all duration-300;
+  }
+
+  .primary-feature .auth-feature-item-icon-container {
+    @apply bg-primary/20;
+  }
+
+  .secondary-feature .auth-feature-item-icon-container {
+    @apply bg-secondary/20;
+  }
+
+  .auth-feature-item-icon {
+    @apply h-6 w-6 transition-all duration-300;
+  }
+
+  .primary-feature .auth-feature-item-icon {
+    @apply text-primary;
+  }
+
+  .secondary-feature .auth-feature-item-icon {
+    @apply text-secondary;
+  }
+
+  .auth-feature-item-title {
+    @apply font-semibold;
+  }
+
+  .auth-feature-item-description {
+    @apply text-base-content/70 text-sm;
+  }
+
+  .auth-feature-item-text {
+    @apply font-medium;
+  }
+
+  /* Success Message */
+  .success-animation {
+    @apply animate-pulse;
+  }
+
+  .auth-success-message {
+    @apply flex flex-col items-center justify-center py-8 space-y-4;
+  }
+
+  .auth-success-icon-container {
+    @apply p-4 bg-success/20 rounded-full mb-4;
+  }
+
+  .auth-success-icon {
+    @apply h-12 w-12 text-success;
+  }
+
+  .auth-success-title {
+    @apply text-2xl font-bold text-success;
+  }
+
+  .auth-success-text {
+    @apply text-base-content/70 text-center mb-6;
+  }
+
+  .auth-success-button {
+    @apply btn btn-success flex items-center justify-center gap-2 px-6;
+  }
+}
+
+/* Toast Customization */
+.Toastify__toast {
+  @apply rounded-xl border border-base-300 shadow-lg;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(var(--p), 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(var(--p), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--p), 0); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1023px) {
+  .auth-feature-container {
+    @apply hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-form-card {
+    @apply p-6;
+  }
+  
+  .auth-title {
+    @apply text-2xl;
+  }
+  
+  .auth-subtitle {
+    @apply text-base;
+  }
+}
+
+
+

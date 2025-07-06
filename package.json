@@ -1,0 +1,13 @@
+{
+  "name": "studybuddy-app",
+  "version": "1.0.0",
+  "description": "StudyBuddy - A collaborative learning platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix Backend && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "start": "npm run start --prefix Backend"
+  },
+  "keywords": ["study", "collaboration", "learning"],
+  "author": "",
+  "license": "ISC"
+}
